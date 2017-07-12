@@ -1,0 +1,67 @@
+﻿@model IEnumerable<NET_DBToFlatFile.Models.UploadedData>
+
+@{
+    ViewBag.Title = "Export To CSV";
+}
+
+<h2>Export To CSV</h2>
+
+<form action="FlatFile/Export" method="post">
+
+    <div class="form-horizontal">
+
+        <hr />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btnExport" type="submit" value="Export Selected" class="btn btn-default pull-right" />
+
+                <a id="btnUpload" href="FlatFile/UploadAndSave" class="btn btn-default pull-right" style="margin-right:5px;"> Upload </a>
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="text-center">
+                Action
+            </th>
+            <th class="text-center">
+                Select
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Export", "Export", new { id = item.ID })
+                </td>
+                <td class="text-center">
+                    <input type="checkbox" name="ExportItem" value="@item.ID">
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</form>

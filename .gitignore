@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/NET_DBToFlatFile/App_Data/TestUpload2Columns.csv
+/NET_DBToFlatFile/App_Data/e0967b4a-4cbd-4dba-8064-245d3f74345c.csv
+/NET_DBToFlatFile/App_Data/ccab0f99-0175-48b1-b359-be4f43f9f0fd.csv
+/NET_DBToFlatFile/App_Data/681f7d2a-35f4-439a-8610-9e4f2ede5fbe.csv
+/NET_DBToFlatFile/App_Data/60055065-a40b-4d2a-aa0c-947930ccd3eb.csv
+/NET_DBToFlatFile/App_Data/5dd8db5a-5eb2-4ada-8ce3-5646eae160e7.csv
+/NET_DBToFlatFile/App_Data/1035e125-d2e3-4070-9cef-23a12e46ccd3.csv
+/NET_DBToFlatFile/bin
+/NET_DBToFlatFile/obj/Debug

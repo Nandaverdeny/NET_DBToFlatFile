@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Upload And Save";
+}
+
+<h2>Upload And Save</h2>
+
+<form action="UploadAndSave" method="post" enctype="multipart/form-data">
+
+    <div class="form-horizontal">
+
+        <hr />
+
+        <div class="form-group">
+            <label for="file" class="control-label col-md-2">File:</label>
+            <div class="col-md-10">
+                <input type="file" name="file" id="file" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btnSubmit" type="submit" value="Create" class="btn btn-default" />
+                @if (ViewBag.Status)
+                {
+                    <p style="color : @ViewBag.MessageColor;">Upload @ViewBag.Message !!!</p>
+                }
+            </div>
+        </div>
+    </div>
+
+</form>
