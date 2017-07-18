@@ -28,13 +28,14 @@ namespace NET_DBToFlatFile.Controllers
         public ActionResult Export(int[] ExportItem)
         {
             bool useExtension = ConfigurationManager.AppSettings["useExtension"].Equals("1");
-            bool useRealFileName = ConfigurationManager.AppSettings["useRealFileName"].Equals("1");
             bool useQuotes = ConfigurationManager.AppSettings["useQuotes"].Equals("1");
+            bool exportedFileNameIncludeDate = ConfigurationManager.AppSettings["exportedFileNameIncludeDate"].Equals("1");
+            string _exportedFileName = ConfigurationManager.AppSettings["exportedFileName"];
             string _path = ConfigurationManager.AppSettings["rootPath"];
             string _fileExtenstion = useExtension ? ".csv" : "";
-            string _fileName = string.Format("{0}{1}", "ExportedFile(" + DateTime.Now.ToString("dd/MM/yyyy") + ")", _fileExtenstion);
+            string _fileName = exportedFileNameIncludeDate ? string.Format("{0}({1}){2}", _exportedFileName, DateTime.Now.ToString("dd/MM/yyyy"), _fileExtenstion) : string.Format("{0}{1}", _exportedFileName, _fileExtenstion);
             string _savePath = Path.Combine(Server.MapPath(_path), _fileName);
-            char separator = ConfigurationManager.AppSettings["separator"].ToCharArray()[0];
+            char _separator = ConfigurationManager.AppSettings["separator"].ToCharArray()[0];
 
             using (var context = new DBContext())
             {
@@ -68,13 +69,14 @@ namespace NET_DBToFlatFile.Controllers
         public FileResult Export(int Id)
         {
             bool useExtension = ConfigurationManager.AppSettings["useExtension"].Equals("1");
-            bool useRealFileName = ConfigurationManager.AppSettings["useRealFileName"].Equals("1");
             bool useQuotes = ConfigurationManager.AppSettings["useQuotes"].Equals("1");
+            bool exportedFileNameIncludeDate = ConfigurationManager.AppSettings["exportedFileNameIncludeDate"].Equals("1");
+            string _exportedFileName = ConfigurationManager.AppSettings["exportedFileName"];
             string _path = ConfigurationManager.AppSettings["rootPath"];
             string _fileExtenstion = useExtension ? ".csv" : "";
-            string _fileName = string.Format("{0}{1}", "ExportedFile("+DateTime.Now.ToString("dd/MM/yyyy")+")", _fileExtenstion);
+            string _fileName = exportedFileNameIncludeDate ? string.Format("{0}({1}){2}", _exportedFileName, DateTime.Now.ToString("dd/MM/yyyy"), _fileExtenstion) : string.Format("{0}{1}", _exportedFileName, _fileExtenstion);
             string _savePath = Path.Combine(Server.MapPath(_path), _fileName);
-            char separator = ConfigurationManager.AppSettings["separator"].ToCharArray()[0];
+            char _separator = ConfigurationManager.AppSettings["separator"].ToCharArray()[0];
 
 
             using (var context = new DBContext())
@@ -88,7 +90,7 @@ namespace NET_DBToFlatFile.Controllers
 
                     CsvContext cc = new CsvContext();
                     cc.Write<UploadedData>(listObj, tw, new CsvFileDescription() {
-                        SeparatorChar = separator,
+                        SeparatorChar = _separator,
                         QuoteAllFields = useQuotes,
                         EnforceCsvColumnAttribute = true
                     });
